@@ -27,13 +27,14 @@ public class ShoppingList {
 
     public void add(String category, String item)
     {
-        if (this.shoppingList.containsKey(category))
+        if (!this.shoppingList.containsKey(category))
+        {
+            this.shoppingList.put(category, new ArrayList<>());
+        }
+
+        if(!item.isEmpty())
         {
             this.shoppingList.get(category).add(item);
-        }
-        else
-        {
-            this.shoppingList.put(category, new ArrayList<>(List.of(item)));
         }
     }
 
@@ -54,8 +55,25 @@ public class ShoppingList {
             System.out.println(category);
             for (var item : this.shoppingList.get(category))
             {
-                System.out.println("  -" + item);
+                System.out.println("  - " + item);
             }
         }
+    }
+
+    public List<String> toList()
+    {
+        List<String> list = new ArrayList<>();
+        for (var category : this.shoppingList.keySet())
+        {
+            var items = this.shoppingList.get(category);
+            var line = category;
+            for (var item : items)
+            {
+                line += "," + item;
+            }
+            list.add(line);
+        }
+
+        return list;
     }
 }

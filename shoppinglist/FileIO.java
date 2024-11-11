@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.io.FileWriter;
 
 public class FileIO {
     private File file;
@@ -23,7 +24,6 @@ public class FileIO {
     public List<String> read()
     {
         List<String> list = new ArrayList<>();
-
         try
         {
             Scanner scanner = new Scanner(this.file);
@@ -40,5 +40,24 @@ public class FileIO {
         }
 
         return list;
+    }
+
+    public void write(List<String> list)
+    {
+        try
+        {
+            FileWriter writer = new FileWriter(this.file);
+            for (var line : list)
+            {
+                writer.write(line + "\n");
+            }
+            writer.close();
+            System.out.println("The file has been saved");
+        }
+        catch (IOException e)
+        {
+            System.out.println("Failed to write to file");
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -6,4 +6,4 @@ run:
 	java Program
 
 clean:
-	rm *.class
+	rm -rf *.class
