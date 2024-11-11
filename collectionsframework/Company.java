@@ -4,6 +4,11 @@ public class Company extends TelephoneEntry {
 
     public Company(String name, Address address, TelephoneNumber telephoneNumber)
     {
+        if(name == null)
+        {
+            throw new IllegalArgumentException();
+        }
+
         this.name = name;
         this.address = address;
         this.telephoneNumber = telephoneNumber;

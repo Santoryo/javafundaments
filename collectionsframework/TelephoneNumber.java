@@ -5,18 +5,13 @@ public class TelephoneNumber implements Comparable<TelephoneNumber>
 
     public TelephoneNumber(int countryCode, String localNumber)
     {
+        if(localNumber == null || countryCode < 0)
+        {
+            throw new IllegalArgumentException();
+        }
+
         this.countryCode = countryCode;
         this.localNumber = localNumber;
-    }
-
-    public int getCountryCode()
-    {
-        return countryCode;
-    }
-
-    public String getLocalNumber()
-    {
-        return localNumber;
     }
 
     @Override public int compareTo(TelephoneNumber other)
