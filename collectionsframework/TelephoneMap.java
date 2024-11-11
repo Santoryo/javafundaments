@@ -8,7 +8,7 @@ public class TelephoneMap {
         this.treeMap = new TreeMap<>();
     }
 
-    public Person addPerson(String name, String surname, String street, String houseNumber, String postalCode, String city, String country, String countryCode, String number)
+    public Person addPerson(String name, String surname, String street, String houseNumber, String postalCode, String city, String country, int countryCode, String number)
     {
         Address address = new Address(street, houseNumber, postalCode, city, country);
         TelephoneNumber telephoneNumber = new TelephoneNumber(countryCode, number);
@@ -17,7 +17,7 @@ public class TelephoneMap {
         return person;
     }
 
-    public Company addCompany(String name, String street, String houseNumber, String postalCode, String city, String country, String countryCode, String number)
+    public Company addCompany(String name, String street, String houseNumber, String postalCode, String city, String country, int countryCode, String number)
     {
         Address address = new Address(street, houseNumber, postalCode, city, country);
         TelephoneNumber telephoneNumber = new TelephoneNumber(countryCode, number);
@@ -31,6 +31,7 @@ public class TelephoneMap {
         for (TelephoneEntry entry : this.treeMap.values())
         {
             System.out.println(entry.description());
+            System.out.println();
         }
     }
 }

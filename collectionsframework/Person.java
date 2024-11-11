@@ -5,6 +5,11 @@ public class Person extends TelephoneEntry {
 
     public Person(String name, String surname, Address address, TelephoneNumber telephoneNumber)
     {
+        if(name == null || surname == null || telephoneNumber == null)
+        {
+            throw new IllegalArgumentException();
+        }
+
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -13,6 +18,6 @@ public class Person extends TelephoneEntry {
 
     @Override public String description()
     {
-        return this.name + " " + this.surname + "\n" + this.address.toString() + "\n" + this.telephoneNumber.toString();
+        return this.telephoneNumber.toString() + "\n" + this.name + " " + this.surname + "\n" + this.address.toString();
     }
 }

@@ -8,6 +8,11 @@ public class Address
 
     public Address(String street, String houseNumber, String postalCode, String city, String country)
     {
+        if(street == null || postalCode == null || city == null || country == null)
+        {
+            throw new IllegalArgumentException();
+        }
+
         this.street = street;
         this.houseNumber = houseNumber;
         this.city = city;
@@ -17,6 +22,6 @@ public class Address
 
     @Override public String toString()
     {
-        return street + " " + houseNumber + "\n" + postalCode + " " + city + "\n" + country;
+        return (this.street + " " + this.houseNumber + "\n" + this.postalCode + ", " + this.city + "\n" + country).replaceAll("null", "");
     }
 }

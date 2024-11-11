@@ -11,7 +11,7 @@ public class Company extends TelephoneEntry {
 
     @Override public String description()
     {
-        return this.name + "\n" + this.address.toString() + "\n" + this.telephoneNumber.toString();
+        return this.telephoneNumber.toString() + "\n" + this.name + "\n" + this.address.toString();
     }
     
 }
