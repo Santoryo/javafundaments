@@ -1,4 +1,6 @@
 import java.util.TreeMap;
+import java.util.Iterator;
+import java.util.Map; 
 
 public class TelephoneMap {
     private TreeMap<TelephoneNumber, TelephoneEntry> treeMap;
@@ -28,10 +30,11 @@ public class TelephoneMap {
 
     public void print()
     {
-        for (TelephoneEntry entry : this.treeMap.values())
+        Iterator<Map.Entry<TelephoneNumber, TelephoneEntry>> iterator = this.treeMap.entrySet().iterator();
+        while(iterator.hasNext())
         {
-            System.out.println(entry.description());
-            System.out.println();
+            Map.Entry<TelephoneNumber, TelephoneEntry> entry = iterator.next();
+            System.out.println(entry.getValue().description() + "\n");
         }
     }
 }

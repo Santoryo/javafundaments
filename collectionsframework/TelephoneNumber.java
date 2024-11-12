@@ -14,7 +14,8 @@ public class TelephoneNumber implements Comparable<TelephoneNumber>
         this.localNumber = localNumber;
     }
 
-    @Override public int compareTo(TelephoneNumber other)
+    @Override
+    public int compareTo(TelephoneNumber other)
     {
         if(this.countryCode == other.countryCode)
         {
@@ -23,7 +24,8 @@ public class TelephoneNumber implements Comparable<TelephoneNumber>
         return this.countryCode - other.countryCode;
     }
 
-    @Override public String toString()
+    @Override
+    public String toString()
     {
         return "+" + this.countryCode + " " + this.localNumber;
     }

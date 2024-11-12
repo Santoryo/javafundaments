@@ -1,4 +1,5 @@
-public class Company extends TelephoneEntry {
+public class Company extends TelephoneEntry
+{
     private String name;
     private Address address;
 
