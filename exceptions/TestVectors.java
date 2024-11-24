@@ -1,18 +1,17 @@
-import java.util.List;
-
-public class TestVectors {
-    public static void main(String[] args) {
-        List<Integer> vector1 = VectorParser.parseVector("1,2,3,4,5");
-        List<Integer> vector2 = VectorParser.parseVector("5,4,F,2,1,F");
-        
+public class TestVectors
+{
+    public static void main(String[] args)
+    {
+        Vector v1 = Vector.fromString("1,2,3,         5");
+        Vector v2 = Vector.fromString("4, 5, 6, 3734, F,ddasdas");
         try
         {
-            List<Integer> result = VectorAdder.addVectors(vector1, vector2);
-            System.out.println(result);
+            Vector v3 = v1.add(v2);
+            System.out.println(v3.toString());
         }
         catch (DifferentVectorsLengthsException e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("Error: " + e.getMessage());
             System.out.println("Vector 1 length: " + e.getVectorLength1());
             System.out.println("Vector 2 length: " + e.getVectorLength2());
         }
