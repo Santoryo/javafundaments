@@ -1,19 +1,58 @@
+import java.util.ArrayList;
+
 public class TestVectors
 {
-    public static void main(String[] args)
+    public static ArrayList<Vector> vectors;
+    public static Vector result;
+
+    public static void main(String[] args) {
+        vectors = new ArrayList<Vector>();
+        while (true)
+        {
+            UserInput userInput = new UserInput();
+            System.out.println("Enter the vector or 's' to sum the vectors: ");
+            String input = userInput.getUserInput();
+
+            if (input.equals("s"))
+            {
+                boolean shouldEnd = canSum();
+                if (shouldEnd == true)
+                {
+                    break;
+                }
+                else
+                {
+                    vectors = new ArrayList<Vector>();
+                    continue;
+                }
+            }
+
+
+            Vector vector = Vector.fromString(input);
+            vectors.add(vector);
+        }
+    }
+
+    static boolean canSum()
     {
-        Vector v1 = Vector.fromString("1,2,3,         5");
-        Vector v2 = Vector.fromString("4, 5, 6, 3734, F,ddasdas");
         try
         {
-            Vector v3 = v1.add(v2);
-            System.out.println(v3.toString());
+            result = result.add(vectors);
         }
         catch (DifferentVectorsLengthsException e)
         {
-            System.out.println("Error: " + e.getMessage());
-            System.out.println("Vector 1 length: " + e.getVectorLength1());
-            System.out.println("Vector 2 length: " + e.getVectorLength2());
+            System.out.println(e.getMessage());
+
+            System.out.print("Vector lengths: ");
+            for(int length : e.getVectorLengths())
+            {
+                System.out.print(length + " ");
+            }
+            System.out.println();
+            return false;
         }
+
+        System.out.println("Added vector is: " + result.toString());
+        return true;
     }
 }

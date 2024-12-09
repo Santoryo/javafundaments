@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vector {
+public class Vector
+{
     private final List<Integer> vector;
 
     public Vector(List<Integer> vector)
@@ -11,21 +12,32 @@ public class Vector {
 
     public List<Integer> getVector()
     {
-        return vector;
+        return this.vector;
     }
 
-    public Vector add(Vector other) throws DifferentVectorsLengthsException
+    public Vector add(ArrayList<Vector> others) throws DifferentVectorsLengthsException
     {
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>(vector);
+        int[] lengths = new int[others.size() + 1];
 
-        if (vector.size() != other.getVector().size())
+        lengths[0] = vector.size();
+
+        for (int i = 0; i < others.size(); i++)
         {
-            throw new DifferentVectorsLengthsException(vector.size(), other.getVector().size());
+            lengths[i + 1] = others.get(i).getVector().size();
         }
 
-        for (int i = 0; i < vector.size(); i++)
+        for (Vector other : others)
         {
-            result.add(vector.get(i) + other.getVector().get(i));
+            if (vector.size() != other.getVector().size())
+            {
+                throw new DifferentVectorsLengthsException(lengths, "Couldn't add vectors");
+            }
+
+            for (int i = 0; i < vector.size(); i++)
+            {
+                result.set(i, result.get(i) + other.getVector().get(i));
+            }
         }
 
         return new Vector(result);
@@ -34,7 +46,7 @@ public class Vector {
     public static Vector fromString(String input)
     {
         List<Integer> elements = new ArrayList<>();
-        String[] parts = input.split("[^\\d-]+"); // Split on non-numeric characters
+        String[] parts = input.split("[^\\d-]+");
         for (String part : parts)
         {
             if (part.length() > 0)

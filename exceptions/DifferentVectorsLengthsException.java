@@ -1,21 +1,15 @@
 class DifferentVectorsLengthsException extends Exception
 {
-    private final int vectorLength1;
-    private final int vectorLength2;
-    public DifferentVectorsLengthsException(int vectorLength1, int vectorLength2)
+    private final int[] vectorLengths;
+    
+    public DifferentVectorsLengthsException(int[] vectorLengths, String errorMessage)
     {
-        super("Vectors must have the same length");
-        this.vectorLength1 = vectorLength1;
-        this.vectorLength2 = vectorLength2;
+        super(errorMessage);
+        this.vectorLengths = vectorLengths;
     }
 
-    public int getVectorLength1()
+    public int[] getVectorLengths()
     {
-        return vectorLength1;
-    }
-
-    public int getVectorLength2()
-    {
-        return vectorLength2;
+        return vectorLengths;
     }
 }
