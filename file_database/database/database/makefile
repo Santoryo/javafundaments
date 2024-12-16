@@ -1,0 +1,2 @@
+all:
+	c: & cd "c:\Users\lucy\Documents\GitHub\javafundaments\file_database\database\database" & "C:\Program Files\Microsoft\jdk-21.0.4.7-hotspot\bin\java.exe" @"C:\Users\lucy\AppData\Local\Temp\cp_6f4a4zy72jvbc3r2kx363km5p.argfile" com.lr.app.App

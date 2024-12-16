@@ -1,0 +1,52 @@
+{
+  "records": {
+    "data": [
+      {
+        "values": {
+          "is_active": true,
+          "name": "LoremIpsum",
+          "id": 1,
+          "age": 199
+        }
+      },
+      {
+        "values": {
+          "is_active": true,
+          "name": "JohnCena",
+          "id": 2,
+          "age": 199
+        }
+      },
+      {
+        "values": {
+          "is_active": true,
+          "name": "JohnCena",
+          "id": 3,
+          "age": 199
+        }
+      }
+    ]
+  },
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "integer"
+    },
+    {
+      "name": "is_active",
+      "type": "boolean"
+    },
+    {
+      "name": "IQ",
+      "type": "double"
+    }
+  ]
+}
