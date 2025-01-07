@@ -31,43 +31,34 @@ public class Table {
         }
     }
 
-    public void addColumn(String name, String type) {
+    public void addColumn(String name, String type) throws DatabaseException {
         if (columnExists(name)) {
             throw new IllegalArgumentException("Column (" + name + ") already exists");
         }
 
         Column column = new Column(name, type);
         columns.add(column);
-        try {
-            save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        save();
     }
 
-    public void addColumn(Column column) {
+    public void addColumn(Column column) throws DatabaseException {
         if (columnExists(column.getName())) {
             throw new IllegalArgumentException("Column (" + column.getName() + ") already exists");
         }
 
         columns.add(column);
-        try {
-            save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        save();
     }
 
-    public void addRecord(Record record) throws IllegalArgumentException, IOException {
+    public void addRecord(Record record) throws DatabaseException {
         Map<String, Object> data = record.getValues();
 
         for (String key : data.keySet()) {
             if (!columnExists(key)) {
-                throw new IllegalArgumentException("Column (" + key + ") does not exist");
+                throw new DatabaseException("Column (" + key + ") does not exist");
             }
             if (!DataTypeIdentifier.determineDataType(data.get(key)).equals(getColumn(key).getType())) {
-                throw new IllegalArgumentException("Data type mismatch for column (" + key + "). Expected "
-                        + getColumn(key).getType() + " but got " + DataTypeIdentifier.determineDataType(data.get(key)));
+                throw new DatabaseException("Data type mismatch for column (" + key + ")");
             }
         }
         records.add(record);
@@ -75,7 +66,7 @@ public class Table {
     }
 
     public void updateRecords(ArrayList<String> keys, ArrayList<Object> values, Records recordsToChange)
-            throws IllegalArgumentException, IOException {
+            throws DatabaseException {
 
         for (Record record : records.getData()) {
             for (Record recordToChange : recordsToChange.getData()) {
@@ -85,7 +76,7 @@ public class Table {
                         String key = keys.get(i);
                         Object value = values.get(i);
                         if (!columnExists(key)) {
-                            throw new IllegalArgumentException("Column (" + key + ") does not exist");
+                            throw new DatabaseException("Column (" + key + ") does not exist");
                         }
 
                         JsonElement jsonElement = JsonParser.parseString(value.toString());
@@ -101,11 +92,10 @@ public class Table {
                 }
             }
         }
-
         save();
     }
 
-    public void save() throws IOException {
+    public void save() throws DatabaseException {
         Gson gson = new GsonBuilder().setPrettyPrinting().setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE)
                 .create();
         TableData tableData = new TableData(records, columns);
@@ -115,7 +105,7 @@ public class Table {
         file.write(json);
     }
 
-    public void delete() throws IOException {
+    public void delete() throws DatabaseException {
         FileIO file = new FileIO("data/" + name + ".json");
         file.delete();
     }
@@ -140,7 +130,7 @@ public class Table {
         return null;
     }
 
-    public void removeColumn(String name) throws IllegalArgumentException, IOException {
+    public void removeColumn(String name) throws DatabaseException {
         int idx = -1;
         for (Column column : columns) {
             if (column.getName().equals(name)) {
@@ -159,6 +149,7 @@ public class Table {
         }
 
         save();
+
     }
 
     public Records getRecords() {
@@ -178,7 +169,14 @@ public class Table {
         return columnNames;
     }
 
-    public void setRecords(Records records) throws IOException {
+    public void setRecords(Records records) throws DatabaseException {
         this.records = records;
+    }
+
+    public void deleteRecords(Records recordsToDelete) throws DatabaseException {
+        for (Record record : recordsToDelete.getData()) {
+            records.delete(record);
+        }
+        save();
     }
 }

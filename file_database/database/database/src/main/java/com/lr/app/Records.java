@@ -63,4 +63,8 @@ public class Records
     public boolean contains(Record record) {
         return data.contains(record);
     }
+
+    public void delete(Record record) {
+        data.remove(record);
+    }
 }

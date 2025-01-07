@@ -1,7 +1,6 @@
 package com.lr.app.Commands;
 
-import java.io.IOException;
-
+import com.lr.app.DatabaseException;
 import com.lr.app.Table;
 
 public class DropCommand extends Command
@@ -15,18 +14,10 @@ public class DropCommand extends Command
     }
 
     @Override
-    public void execute() throws RuntimeException
+    public void execute() throws DatabaseException
     {
         Table table = new Table(tableName);
-        try
-        {
-            table.delete();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-
+        table.delete();
         System.out.println("Table " + tableName + " dropped successfully");
     }
 }

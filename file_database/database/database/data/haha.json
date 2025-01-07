@@ -1,0 +1,15 @@
+{
+  "records": {
+    "data": []
+  },
+  "columns": [
+    {
+      "name": "id",
+      "type": "INT"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}

@@ -3,6 +3,7 @@ package com.lr.app.Commands;
 import java.util.ArrayList;
 
 import com.lr.app.Column;
+import com.lr.app.DatabaseException;
 import com.lr.app.Table;
 
 public class CreateCommand extends Command
@@ -17,7 +18,7 @@ public class CreateCommand extends Command
         this.columns = columns;
     }
 
-    public void execute() throws Exception
+    public void execute() throws DatabaseException
     {
         Table table = new Table(tableName);
         for(Column column : columns)

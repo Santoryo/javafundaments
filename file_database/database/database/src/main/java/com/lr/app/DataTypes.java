@@ -23,7 +23,7 @@ public enum DataTypes {
     {
         for (DataTypes dataType : DataTypes.values())
         {
-            if (dataType.toString().equals(type))
+            if (dataType.toString().toLowerCase().equals(type))
             {
                 return dataType;
             }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.lr.app.Table;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.lr.app.DatabaseException;
 import com.lr.app.Record;
 
 public class InsertCommand extends Command
@@ -23,7 +24,7 @@ public class InsertCommand extends Command
     }
 
     @Override
-    public void execute() throws IllegalArgumentException, IOException
+    public void execute() throws DatabaseException
     {
         Table table = new Table(tableName);
         Record record = new Record();
@@ -52,19 +53,7 @@ public class InsertCommand extends Command
             }
         }
 
-        try
-        {
-            table.addRecord(record);
-        }
-        catch (IllegalArgumentException e)
-        {
-            throw new IllegalArgumentException(e);
-        }
-        catch (IOException e)
-        {
-            throw new IOException(e);
-        }
-
+        table.addRecord(record);
         System.out.println("Record inserted successfully");
     }
 }

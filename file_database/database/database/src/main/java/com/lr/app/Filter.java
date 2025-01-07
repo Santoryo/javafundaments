@@ -3,9 +3,16 @@ package com.lr.app;
 public class Filter {
     private Records records;
 
-    public Filter(Records records, String columnName, String operator, Object value)
+    public Filter(Records records, String columnName, String operator, Object value) throws DatabaseException
     {
         this.records = records;
+
+        if(value == null)
+        {
+            throw new DatabaseException("The syntax of the query is incorrect during the WHERE process");
+        }
+
+
         filter(columnName, operator, value.toString());
     }
 
@@ -19,7 +26,7 @@ public class Filter {
         this.records = records;
     }
 
-    public Records filter(String columnName, String operator, String value)
+    public Records filter(String columnName, String operator, String value) throws DatabaseException
     {
         Records filteredRecords = new Records();
         for (Record record : records.getData())
